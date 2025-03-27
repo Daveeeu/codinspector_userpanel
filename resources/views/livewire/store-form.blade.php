@@ -641,9 +641,9 @@
                                         <!-- Jobb oldal: Lista -->
                                         <div class="col-md-6">
                                             <ul class="mt-3">
-                                                <li><i class="bi bi-check-circle {{ $package->premium ? 'premium' : '' }}"></i> Single project use</li>
-                                                <li><i class="bi bi-check-circle {{ $package->premium ? 'premium' : '' }}"></i> Basic dashboard</li>
-                                                <li><i class="bi bi-check-circle {{ $package->premium ? 'premium' : '' }}"></i> All components included</li>
+                                                @foreach($package->features as $feature)
+                                                    <li><i class="bi bi-check-circle {{ $package->premium ? 'premium' : '' }}"></i>{{$feature['name']}}</li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -680,9 +680,13 @@
 
                                     <!-- Lista -->
                                     <ul class="mt-3">
-                                        <li><i class="bi bi-check-circle {{ $package->premium ? 'premium' : '' }}"></i> Single project use</li>
-                                        <li><i class="bi bi-check-circle {{ $package->premium ? 'premium' : '' }}"></i> Basic dashboard</li>
-                                        <li><i class="bi bi-check-circle {{ $package->premium ? 'premium' : '' }}"></i> All components included</li>
+                                        @foreach($package->features as $feature)
+                                            @if($feature->is_included)
+                                                <li><i class="bi bi-check-circle {{ $package->premium ? 'premium' : '' }}"></i>{{$feature['name']}}</li>
+                                            @else
+                                                <li><i class="bi bi-x-circle {{ $package->premium ? 'premium' : '' }} text-danger"></i>{{$feature['name']}}</li>
+                                            @endif
+                                        @endforeach
                                     </ul>
 
                                     <!-- Gomb -->

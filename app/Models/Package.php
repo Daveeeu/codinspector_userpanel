@@ -34,4 +34,12 @@ class Package extends Model
         return $this->morphToMany(Role::class, 'model', 'model_has_roles', 'model_id', 'role_id');
     }
 
+    /**
+     * Visszaadja a csomag funkcióit.
+     */
+    public function features()
+    {
+        return $this->hasMany(PackageFeature::class, 'package_id', 'package_id');
+    }
+
 }
