@@ -106,6 +106,7 @@ class StripeService
 
     public static function cancelSubscription($subscriptionId, $cancelAtPeriodEnd = true)
     {
+        self::setApiKey(env('STRIPE_KEY'));
         $subscription = StripeSubscription::retrieve($subscriptionId);
 
         if (!$subscription) {

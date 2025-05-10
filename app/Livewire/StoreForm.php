@@ -205,6 +205,13 @@ class StoreForm extends Component
 
     public function applyCoupon()
     {
+
+        if (empty($this->coupon_code)) {
+            session()->flash('coupon_error', 'Kérjük, adjon meg egy kuponkódot.');
+            $this->dispatch('init-stripe-payment');
+            return;
+        }
+
         try {
             StripeService::setApiKey(config('services.stripe.secret'));
             $coupon = StripeService::retrieveCoupon($this->coupon_code);
@@ -215,14 +222,33 @@ class StoreForm extends Component
                 return;
             }
 
-            $this->dispatch('init-stripe-payment');
-            session()->flash('coupon_success', 'A kupon érvényes!');
+            session()->flash('coupon_success', 'A kupon sikeresen alkalmazva!');
             $this->applied_coupon = $this->coupon_code;
+            $this->dispatch('init-stripe-payment');
 
+        } catch (\Stripe\Exception\InvalidRequestException $e) {
+            // Nem létező kuponkód vagy hibás kérés
+            session()->flash('coupon_error', 'A megadott kuponkód nem található.');
+            $this->dispatch('init-stripe-payment');
+        } catch (\Stripe\Exception\AuthenticationException $e) {
+            // API kulcs hiba
+            session()->flash('coupon_error', 'Hitelesítési hiba történt. Kérjük, próbálja újra később.');
+            $this->dispatch('init-stripe-payment');
+        } catch (\Stripe\Exception\ApiConnectionException $e) {
+            // Hálózati hiba
+            session()->flash('coupon_error', 'Kapcsolódási hiba történt. Kérjük, ellenőrizze internetkapcsolatát.');
+            $this->dispatch('init-stripe-payment');
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            // Egyéb Stripe API hiba
+            session()->flash('coupon_error', 'Hiba történt a kupon ellenőrzése során. Kérjük, próbálja újra később.');
+            $this->dispatch('init-stripe-payment');
         } catch (\Exception $e) {
-            session()->flash('coupon_error', 'Hiba történt a kupon ellenőrzése közben: ' . $e->getMessage());
+            // Bármilyen más hiba
+            session()->flash('coupon_error', 'Váratlan hiba történt a kupon ellenőrzése során.');
+            $this->dispatch('init-stripe-payment');
         }
     }
+
 
     public function storePaymentMethod($paymentMethodId)
     {

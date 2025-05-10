@@ -164,6 +164,13 @@ class SelectPackage extends Component
         }
     }
 
+    #[On('confirmCancellation')]
+    public function confirmCancellation($data)
+    {
+        $this->cancelSubscription($data['type']);
+    }
+
+
     public function render()
     {
         return view('livewire.select-package');

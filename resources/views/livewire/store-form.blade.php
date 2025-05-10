@@ -626,16 +626,17 @@
                                             <p class="text-start">{{$package->description}}</p>
 
                                             <!-- Ár -->
-                                            @if($package->cost_per_query)
+                                            @if(floatval($package->cost_per_query) > 0)
                                                 <p style="padding:0;margin:0;" class="price {{ $package->premium ? 'premium-color' : '' }} text-start">{{ $package->cost_per_query }} <small>Ár/lekérdezés</small></p>
                                             @endif
-                                            @if($package->cost)
+                                            @if(floatval($package->cost) > 0)
                                                 @if($paymentFrequency === 'monthly')
                                                     <div style="padding:0;margin:0;" class="price {{ $package->premium ? 'premium-color' : '' }} text-start">{{ $package->cost }} <small>per month</small></div>
                                                 @else
-                                                    <div  style="padding:0;margin:0;" class="price {{ $package->premium ? 'premium-color' : '' }} text-start">{{ $package->cost_yearly }} <small>per year</small></div>
+                                                    <div style="padding:0;margin:0;" class="price {{ $package->premium ? 'premium-color' : '' }} text-start">{{ $package->cost_yearly }} <small>per year</small></div>
                                                 @endif
                                             @endif
+
                                         </div>
 
                                         <!-- Jobb oldal: Lista -->
@@ -667,10 +668,10 @@
                                     <p class="text-start">{{$package->description}}</p>
 
                                     <!-- Ár -->
-                                    @if($package->cost_per_query)
+                                    @if(floatval($package->cost_per_query) > 0)
                                         <p class="price {{ $package->premium ? 'premium-color' : '' }} text-start">{{ $package->cost_per_query }} <small>Ár/lekérdezés</small></p>
                                     @endif
-                                    @if($package->cost)
+                                    @if(floatval($package->cost) > 0)
                                         @if($paymentFrequency === 'monthly')
                                             <div class="price {{ $package->premium ? 'premium-color' : '' }} text-start">{{ $package->cost }} <small>per month</small></div>
                                         @else

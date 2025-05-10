@@ -206,7 +206,8 @@
                             {{-- Buttons for package selection or actions --}}
                             <div class="mt-auto">
                                 @if($nextPackageId == $package->package_id)
-                                    <button wire:click="cancelSubscription(1)" class="btn btn-danger w-100 mt-3">
+                                    <button     wire:click="$dispatch('showDeleteConfirmation', { type: 1 })"
+                                                class="btn btn-danger w-100 mt-3">
                                         Lemondás
                                     </button>
                                     <small class="text-warning d-block mt-2 text-center">
@@ -232,7 +233,8 @@
 
                                 @if($selectedPackageId == $package->package_id && $subscription->status === 'active')
                                     @if($subscription->auto_renewal)
-                                        <button wire:click="cancelSubscription(0)" wire:loading.attr="disabled" class="btn btn-trial btn-danger w-100 mt-2">
+                                        <button     wire:click="$dispatch('showDeleteConfirmation', { type: 0 })"
+                                                    wire:loading.attr="disabled" class="btn btn-trial btn-danger w-100 mt-2">
                                             Lemondás
                                             <span wire:loading class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
                                         </button>
@@ -283,7 +285,8 @@
                             {{-- Buttons for package selection or actions --}}
                             <div class="mt-auto">
                                 @if($nextPackageId == $package->package_id)
-                                    <button wire:click="cancelSubscription(1)" class="btn btn-danger w-100 mt-3">
+                                    <button wire:click="$dispatch('showDeleteConfirmation', { type: 1 })"
+                                                class="btn btn-danger w-100 mt-3">
                                         Lemondás
                                     </button>
                                     <small class="text-warning d-block mt-2 text-center">
@@ -309,7 +312,8 @@
 
                                 @if($selectedPackageId == $package->package_id && $subscription->status === 'active')
                                     @if($subscription->auto_renewal)
-                                        <button wire:click="cancelSubscription(0)" wire:loading.attr="disabled" class="btn btn-trial btn-danger w-100 mt-2">
+                                        <button     wire:click="$dispatch('showDeleteConfirmation', { type: 0 })"
+                                                    wire:loading.attr="disabled" class="btn btn-trial btn-danger w-100 mt-2">
                                             Lemondás
                                             <span wire:loading class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
                                         </button>
