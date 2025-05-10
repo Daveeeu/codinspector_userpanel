@@ -11,7 +11,7 @@
             <div class="row g-4 align-items-center">
                 <div class="col-lg-6 d-flex">
                     <div class="card-body">
-                        <img src="{{ URL::asset('build/images/logo1.png') }}" class="mb-4" width="145" alt="">
+                        <img src="/logo.svg" class="mb-4" width="145" alt="">
                         <h4 class="fw-bold">{{ __('forgot_password_heading') }}</h4>
                         <p class="mb-0">{{ __('forgot_password_description') }}</p>
 

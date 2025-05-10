@@ -19,7 +19,7 @@
     {
         use AuthenticatesUsers;
 
-        protected $redirectTo = RouteServiceProvider::HOME;
+        protected $redirectTo = '/home';
 
         public function authenticated(Request $request, $user)
         {

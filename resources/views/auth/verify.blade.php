@@ -10,7 +10,7 @@
             <div class="row g-4">
                 <div class="col-lg-6 d-flex">
                     <div class="card-body">
-                        <img src="{{ URL::asset('build/images/logo1.png') }}" class="mb-4" width="145" alt="">
+                        <img src="/logo.svg" class="mb-4" width="145" alt="">
                         <h4 class="fw-bold">{{ __('verify_heading') }}</h4>
                         <p class="mb-4">{{ __('verify_description') }}</p>
 

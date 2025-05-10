@@ -27,6 +27,9 @@ class StripeService
             $customer = Customer::create([
                 'email' => $user->email,
                 'name' => "{$user->first_name} {$user->last_name}",
+                'metadata' => [
+                    'domain_id' => 'inspectorramburs.ro'
+                ],
             ]);
 
             $user->update(['stripe_customer_id' => $customer->id]);
