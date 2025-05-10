@@ -81,8 +81,8 @@ Route::post('2fa/verify', [LoginController::class, 'verifyTwoFactor']);
         Route::post('/notifications/delete-all', [\App\Http\Controllers\UserNotificationController::class, 'deleteAll'])->name('notifications.deleteAll');
         Route::post('/notifications/get-modal-content', [\App\Http\Controllers\UserNotificationController::class, 'getModalContent'])->name('notifications.getModalContent');
 
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     });
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // Define a group of routes with 'auth' middleware applied
 Route::middleware(['auth', 'verified', '2fa'])->group(function () {
     // Define a GET route for the root URL ('/')
