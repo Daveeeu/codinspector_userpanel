@@ -5,7 +5,10 @@
     use App\Http\Controllers\Controller;
     use App\Providers\RouteServiceProvider;
     use App\Models\User;
+    use Illuminate\Auth\Events\Registered;
     use Illuminate\Foundation\Auth\RegistersUsers;
+    use Illuminate\Http\JsonResponse;
+    use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Hash;
     use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +16,7 @@
     {
         use RegistersUsers;
 
-        protected $redirectTo = RouteServiceProvider::HOME;
+        protected $redirectTo = '/login';
 
         public function __construct()
         {
@@ -48,5 +51,20 @@
                 'accepted_terms_of_service' => isset($data['accepted_terms_of_service']),
                 'referral_code' => null,
             ]);
+        }
+
+        public function register(Request $request)
+        {
+            $this->validator($request->all())->validate();
+
+            event(new Registered($user = $this->create($request->all())));
+
+            if ($response = $this->registered($request, $user)) {
+                return $response;
+            }
+
+            return $request->wantsJson()
+                ? new JsonResponse([], 201)
+                : redirect($this->redirectPath());
         }
     }
