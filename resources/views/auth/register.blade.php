@@ -65,27 +65,29 @@
                                 </div>
 
                                 <!-- Jelszó -->
+                                <!-- Jelszó -->
                                 <div class="col-12">
                                     <label for="inputChoosePassword" class="form-label">{{ __('register_password_label') }}</label>
-                                    <div class="input-group" id="show_hide_password">
+                                    <div class="input-group" id="show_hide_password_1">
                                         <input type="password" class="form-control border-end-0 @error('password') is-invalid @enderror" name="password" id="inputChoosePassword" placeholder="{{ __('register_password_placeholder') }}">
                                         <a href="javascript:;" class="input-group-text bg-transparent"><i class="bi bi-eye-slash-fill"></i></a>
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+            <strong>{{ $message }}</strong>
+        </span>
                                         @enderror
                                     </div>
                                 </div>
 
                                 <!-- Jelszó megerősítése -->
                                 <div class="col-12">
-                                    <label for="inputChoosePassword" class="form-label">{{ __('register_confirm_password_label') }}</label>
-                                    <div class="input-group" id="show_hide_password">
+                                    <label for="inputConfirmPassword" class="form-label">{{ __('register_confirm_password_label') }}</label>
+                                    <div class="input-group" id="show_hide_password_2">
                                         <input type="password" class="form-control border-end-0" name="password_confirmation" id="password_confirmation" placeholder="{{ __('register_confirm_password_placeholder') }}">
                                         <a href="javascript:;" class="input-group-text bg-transparent"><i class="bi bi-eye-slash-fill"></i></a>
                                     </div>
                                 </div>
+
 
                                 <!-- Adatvédelmi szabályzat -->
                                 <div class="form-check mt-3">

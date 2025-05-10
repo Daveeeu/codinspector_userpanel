@@ -22,25 +22,30 @@
 
   @include('layouts.vendor-scripts')
   <script>
-    $(document).ready(function () {
-      $("#show_hide_password a").on('click', function (event) {
-        event.preventDefault();
-        if ($('#show_hide_password input').attr("type") == "text") {
-          $('#show_hide_password input').attr('type', 'password');
-          $('#show_hide_password i').addClass("bi-eye-slash-fill");
-          $('#show_hide_password i').removeClass("bi-eye-fill");
-        } else if ($('#show_hide_password input').attr("type") == "password") {
-          $('#show_hide_password input').attr('type', 'text');
-          $('#show_hide_password i').removeClass("bi-eye-slash-fill");
-          $('#show_hide_password i').addClass("bi-eye-fill");
-        }
+      $(document).ready(function () {
+          $("#show_hide_password_1 a, #show_hide_password_2 a").on('click', function (event) {
+              event.preventDefault();
+              var passwordField = $(this).closest('.input-group');
+              var passwordInput = passwordField.find('input');
+              var icon = passwordField.find('i');
+
+              if (passwordInput.attr("type") === "text") {
+                  passwordInput.attr('type', 'password');
+                  icon.addClass("bi-eye-slash-fill");
+                  icon.removeClass("bi-eye-fill");
+              } else if (passwordInput.attr("type") === "password") {
+                  passwordInput.attr('type', 'text');
+                  icon.removeClass("bi-eye-slash-fill");
+                  icon.addClass("bi-eye-fill");
+              }
+          });
       });
-    });
+
   </script>
 
   @yield('scripts')
 
 
 </body>
-  
+
 </html>
