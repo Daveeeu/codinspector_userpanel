@@ -111,7 +111,7 @@
     "failed_payment_hello": "Vă salutăm, :nume!",
     "failed_payment_description": "Ne pare rău, dar nu am putut procesa plata pentru reînnoirea abonamentului pentru domeniul :storeDomain.",
     "failed_payment_reason": "Acest lucru se poate datora unei probleme cu metoda de plată sau fondurilor insuficiente.",
-    "failed_payment_solution": "Cum poți rezolva situația?<br>Te rugăm să actualizezi informațiile de plată sau să te asiguri că ai la dispoziție fonduri suficiente. După ce actualizezi datele, vom reîncerca automat plata."
+    "failed_payment_solution": "Cum poți rezolva situația?<br>Te rugăm să actualizezi informațiile de plată sau să te asiguri că ai la dispoziție fonduri suficiente. După ce actualizezi datele, vom reîncerca automat plata.",
     "failed_payment_update_payment_details": "Actualizare Date Plată",
     "failed_payment_subscription_warning": "Abonamentul tău va fi anulat la data de:expireDate, dacă problema plății nu va fi rezolvată.",
     "failed_payment_footer_thank_you": "Mulțumim că folosiți platforma noastră!",
