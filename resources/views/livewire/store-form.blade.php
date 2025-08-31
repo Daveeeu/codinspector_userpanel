@@ -342,19 +342,100 @@
                 </div>
 
 
-                <div>
-                    <!-- Fizetési mód -->
-                    <div class="form-group mt-4" wire:ignore>
-                        <label for="payment_method">Fizetési mód</label>
-                        <div id="card-element"></div>
-                        <small class="text-muted">A kártyaadatokat a Stripe biztonságosan kezeli.</small>
-                        @error('payment_method') <span class="text-danger">{{ $message }}</span> @enderror
+                <style>
+                    .stripe-payment-container {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.75rem;
+                        max-width: 400px;
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    }
+
+                    .payment-method-header {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .payment-method-label {
+                        font-weight: 600;
+                        font-size: 1.1rem;
+                        color: #1a1a1a;
+                        margin: 0;
+                    }
+
+                    .stripe-badge {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        padding: 0.25rem 0.5rem;
+                        background-color: #f8f9fa;
+                        border: 1px solid #e9ecef;
+                        border-radius: 4px;
+                        font-size: 0.75rem;
+                        color: #6c757d;
+                    }
+
+                    .stripe-logo {
+                        height: 16px;
+                        width: auto;
+                        opacity: 0.8;
+                    }
+
+                    #card-element {
+                        padding: 1rem;
+                        border: 1px solid #e1e8ed;
+                        border-radius: 8px;
+                        background: #ffffff;
+                        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                        transition: all 0.2s ease;
+                    }
+
+                    #card-element:focus-within {
+                        border-color: #5167FC;
+                        box-shadow: 0 0 0 3px rgba(81, 103, 252, 0.1);
+                    }
+
+                    .payment-security-note {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        color: #6c757d;
+                        font-size: 0.875rem;
+                        margin-top: 0.5rem;
+                    }
+
+                    .security-icon {
+                        width: 16px;
+                        height: 16px;
+                        opacity: 0.6;
+                    }
+                </style>
+
+                <div class="form-group mt-4 stripe-payment-container" wire:ignore>
+                    <div class="payment-method-header">
+                        <label for="payment_method" class="payment-method-label">Fizetési mód</label>
+                        <div class="stripe-badge">
+                            <svg class="stripe-logo" viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#5167FC" d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04.8-.06 1.48zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zM40.95 20.3c-1.44 0-2.32-.6-2.9-1.04l-.02 4.63-4.12.87V5.57h3.76l.08 1.02a4.7 4.7 0 0 1 3.23-1.29c2.9 0 5.62 2.6 5.62 7.4 0 5.23-2.7 7.6-5.65 7.6zM40 8.95c-.95 0-1.54.34-1.97.81l.02 6.12c.4.44.98.78 1.95.78 1.52 0 2.54-1.65 2.54-3.87 0-2.15-1.04-3.84-2.54-3.84zM28.24 5.57h4.13v14.44h-4.13V5.57zm0-4.7L32.37 0v3.36l-4.13.88V.88zm-4.32 9.35v9.79H19.8V5.57h3.7l.12 1.22c1-1.77 3.07-1.41 3.62-1.22v3.79c-.52-.17-2.29-.43-3.32.86zm-8.55 4.72c0 2.43 2.6 1.68 3.12 1.46v3.36c-.55.3-1.54.54-2.89.54a4.15 4.15 0 0 1-4.27-4.24l.01-13.17 4.02-.86v3.54h3.14V9.1h-3.13v5.85zm-8.78.9c0 3.75-2.85 7.6-7.75 7.6C-4.8 23.44-7.5 19.6-7.5 15.76c0-3.84 2.8-7.6 7.75-7.6 4.8 0 7.5 3.85 7.5 7.6zm-4.51-.17c0-2.58-1.05-3.64-2.98-3.64-1.98 0-3.02 1.18-3.02 3.64 0 2.63 1.03 3.8 3.02 3.8 1.93 0 2.98-1.17 2.98-3.8z"/>
+                            </svg>
+                            <span>Powered by</span>
+                        </div>
                     </div>
 
+                    <div id="card-element"></div>
 
+                    <div class="payment-security-note">
+                        <svg class="security-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>A kártyaadatokat a Stripe biztonságosan kezeli.</span>
+                    </div>
 
-
+                    @error('payment_method') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
+
 
 
                 <!-- Kuponkód mező -->
